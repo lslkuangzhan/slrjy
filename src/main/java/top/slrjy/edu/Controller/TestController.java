@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import top.slrjy.edu.Config.Result;
 import top.slrjy.edu.Entity.User;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 @RestController
 @RequestMapping("/test")
 public class TestController {
@@ -18,7 +21,7 @@ public class TestController {
     }
 
     @RequestMapping("/show2")
-    public String show2() {
-        return "OK2";
+    public Result show2(@NotBlank  @Size(min = 8, max = 10) String code) {
+        return new Result("2","1");
     }
 }

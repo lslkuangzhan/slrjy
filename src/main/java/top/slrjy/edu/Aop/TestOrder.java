@@ -54,9 +54,10 @@ public class TestOrder {
         Iterator<ConstraintViolation<Object>> violationIterator = validResult.iterator();
         while (violationIterator.hasNext()) {
             // 此处可以抛个异常提示用户参数输入格式不正确
-            System.out.println("method check---------" + violationIterator.next().getMessage());
+            String message =violationIterator.next().getMessage();
+            System.out.println("method check---------" + message);
             result.setResultCode(201);
-            result.setMessage("验证出错："+violationIterator.next().getMessage());
+            result.setMessage("验证出错："+message);
             temp=false;
             break;
         }

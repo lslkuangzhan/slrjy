@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TestAspect {
 
-    @Pointcut("within(top.slrjy.edu.Controller..*) && !within(top.slrjy.edu.Controller.LoginController)")
+/*    @Pointcut("within(top.slrjy.edu.Controller..*) && !within(top.slrjy.edu.Controller.LoginController)")
     public void pointCut(){}
 
     @Around("pointCut()")
@@ -28,7 +28,7 @@ public class TestAspect {
 
         System.out.println("-------------没有登录1-------------");
         // return "redirect:/login/show";
-    }
+    }*/
 
  /*
  @Aspect // FOR AOP

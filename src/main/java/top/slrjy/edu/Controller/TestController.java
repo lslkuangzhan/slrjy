@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.slrjy.edu.Config.Result;
+import top.slrjy.edu.Config.ResultGenerator;
 import top.slrjy.edu.Entity.User;
 
 import javax.validation.constraints.NotBlank;
@@ -17,11 +18,11 @@ public class TestController {
     @ResponseBody
     public Result show(User user) {
         System.out.println("这里被访问了!");
-        return  new Result("登陆成功！","OKOKOK");
+        return  ResultGenerator.genSuccessResult("didididiOKOKOK1");
     }
 
     @RequestMapping("/show2")
     public Result show2(@NotBlank  @Size(min = 8, max = 10) String code) {
-        return new Result("2","1");
+        return  ResultGenerator.genSuccessResult("show2");
     }
 }

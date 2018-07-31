@@ -19,6 +19,8 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
 
+import static top.slrjy.edu.Config.ResultCode.UNAUTHORIZED;
+
 @Component
 @Order(0)
 @Aspect
@@ -38,7 +40,7 @@ public class TestOrder {
 
     @Around("controllerMethodPointcut()")
     public Result trackInfo(ProceedingJoinPoint pjp) throws Throwable {
-        Result result = new Result("","");
+        Result result = new Result();
         //  获得切入目标对象
         Object target = pjp.getThis();
         // 获得切入方法参数
@@ -56,7 +58,7 @@ public class TestOrder {
             // 此处可以抛个异常提示用户参数输入格式不正确
             String message =violationIterator.next().getMessage();
             System.out.println("method check---------" + message);
-            result.setResultCode(201);
+            result.setCode(UNAUTHORIZED);
             result.setMessage("验证出错："+message);
             temp=false;
             break;
@@ -69,7 +71,7 @@ public class TestOrder {
                     String message =violationIterator.next().getMessage();
                     // 此处可以抛个异常提示用户参数输入格式不正确
                     System.out.println("bean check-------" +message);
-                    result.setResultCode(201);
+                    result.setCode(UNAUTHORIZED);
                     result.setMessage("验证出错："+message);
                     temp=false;
                     break;

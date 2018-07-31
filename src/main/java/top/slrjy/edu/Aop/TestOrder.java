@@ -55,7 +55,7 @@ public class TestOrder {
         while (violationIterator.hasNext()) {
             // 此处可以抛个异常提示用户参数输入格式不正确
             String message =violationIterator.next().getMessage();
-            System.out.println("method check---------" + message);
+           // System.out.println("method check---------" + message);
             result.setResultCode(201);
             result.setMessage("验证出错："+message);
             temp=false;
@@ -68,7 +68,7 @@ public class TestOrder {
                 while (violationIterator.hasNext()) {
                     String message =violationIterator.next().getMessage();
                     // 此处可以抛个异常提示用户参数输入格式不正确
-                    System.out.println("bean check-------" +message);
+                  //  System.out.println("bean check-------" +message);
                     result.setResultCode(201);
                     result.setMessage("验证出错："+message);
                     temp=false;

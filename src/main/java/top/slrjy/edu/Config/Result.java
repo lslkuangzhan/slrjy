@@ -1,37 +1,41 @@
 package top.slrjy.edu.Config;
 
-public class Result<T> {
+import com.alibaba.fastjson.JSON;
+
+public class Result {
+    private int code;
     private String message;
-    public int resultCode;
-    public T data;
-    public Result(String message,T data) {
-        this.resultCode = 0;
-        this.message = message;
-        this.data = data;
+    private Object data;
+
+    public Result setCode(ResultCode resultCode) {
+        this.code = resultCode.code();
+        return this;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
+    public int getCode() {
+        return code;
     }
 
     public String getMessage() {
-
         return message;
     }
 
-    public void setMessage(String message) {
+    public Result setMessage(String message) {
         this.message = message;
+        return this;
     }
 
-    public int getResultCode() {
-        return resultCode;
+    public Object getData() {
+        return data;
     }
 
-    public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
+    public Result setData(Object data) {
+        this.data = data;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

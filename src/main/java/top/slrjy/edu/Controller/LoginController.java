@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.slrjy.edu.Config.Result;
+import top.slrjy.edu.Config.ResultGenerator;
 
 /**
  * @ Author : Luc .
@@ -22,11 +23,11 @@ public class LoginController {
     @RequestMapping("/login")
     @ResponseBody
     public Result login() {
-        return new Result("登陆成功！","");
+        return ResultGenerator.genSuccessResult("登陆成功");
     }
     @RequestMapping("/register")
     @ResponseBody
     public Result register() {
-        return new Result("注册成功！","");
+        return ResultGenerator.genSuccessResult("注册成功");
     }
 }

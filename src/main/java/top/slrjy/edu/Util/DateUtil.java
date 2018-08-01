@@ -88,8 +88,9 @@ public class DateUtil {
         return weekDays[w];
     }
         public static void main(String[] args) {
-            System.out.println(calculateDifferDays("2018-04-05","2018-04-08"));
-            System.out.println(checkDateFormat("2018-04-05"));
+           // System.out.println(calculateDifferDays("2018-04-05","2018-04-08"));
+           // System.out.println(checkDateFormat("2018-04-05"));
+            System.out.println(System.currentTimeMillis());
         }
 
 

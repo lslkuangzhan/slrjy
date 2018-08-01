@@ -27,4 +27,9 @@ public class ResultGenerator {
                 .setCode(ResultCode.FAIL)
                 .setMessage(message);
     }
+    public static Result genUnknownResult(String message) {
+        return new Result()
+                .setCode(ResultCode.UNKNOWN_ERROR)
+                .setMessage(message);
+    }
 }

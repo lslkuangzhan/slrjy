@@ -8,7 +8,9 @@ import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import top.slrjy.edu.Config.DescribeException;
 import top.slrjy.edu.Config.Result;
+import top.slrjy.edu.Config.ResultGenerator;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -20,6 +22,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import static top.slrjy.edu.Config.ResultCode.UNAUTHORIZED;
+import static top.slrjy.edu.Config.ResultCode.UNVALIDATION;
 
 @Component
 @Order(0)
@@ -59,7 +62,7 @@ public class TestOrder {
             String message =violationIterator.next().getMessage();
 
             System.out.println("method check---------" + message);
-            result.setCode(UNAUTHORIZED);
+            result.setCode(UNVALIDATION);
             result.setMessage("验证出错："+message);
             temp=false;
             break;
@@ -72,7 +75,7 @@ public class TestOrder {
                     String message =violationIterator.next().getMessage();
                     // 此处可以抛个异常提示用户参数输入格式不正确
                     System.out.println("bean check-------" +message);
-                    result.setCode(UNAUTHORIZED);
+                    result.setCode(UNVALIDATION);
                     result.setMessage("验证出错："+message);
                     temp=false;
                     break;
@@ -90,9 +93,29 @@ public class TestOrder {
        System.out.println("-------------TestAfter1111-------------");
    }
     @AfterReturning(returning = "result",pointcut="controllerMethodPointcut()")
-    public Result afterThrowing(JoinPoint joinPoint,Result result) {
-        System.out.println("[Aspect1] afterThrowing advise");
+    public Result afterReturning(JoinPoint joinPoint,Result result) {
+        System.out.println("[Aspect1] afterReturning advise");
         return result;
+    }
+
+
+    @AfterThrowing(throwing = "e",pointcut="controllerMethodPointcut()")
+    public void afterThrowing(JoinPoint joinPoint,Throwable e) {
+        String className = joinPoint.getTarget().getClass().getSimpleName();
+        String methodName = joinPoint.getSignature().getName();
+        Object [] args  =joinPoint.getArgs();
+        String location = className + "." + methodName + ":";
+        String arg = "";
+        for (int i=0;i<args.length;i++)
+        {
+            arg += args[i];
+        }
+        String errorMessage =e.getMessage()+e.getStackTrace()[0].getLineNumber();
+        System.out.println(location );
+        System.out.println(arg );
+        System.out.println(errorMessage );
+
+
     }
    /* @Before("controllerMethodPointcut()")
     public void before(JoinPoint joinPoint) {

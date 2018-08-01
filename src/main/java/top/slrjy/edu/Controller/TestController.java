@@ -10,16 +10,21 @@ import top.slrjy.edu.Entity.User;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
     @RequestMapping("/show")
     @ResponseBody
-    public Result show(User user) {
-        System.out.println("这里被访问了!");
+    public Result show(User user) throws Exception {
+        a();
         return  ResultGenerator.genSuccessResult("didididiOKOKOK1");
     }
+
+    public  void  a (){
+        int i = 5/0;
+    };
 
     @RequestMapping("/show2")
     public Result show2(@NotBlank  @Size(min = 8, max = 10) String code) {

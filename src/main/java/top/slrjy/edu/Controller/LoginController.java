@@ -27,7 +27,7 @@ public class LoginController {
     @RequestMapping("/login")
     @ResponseBody
     public Result login() {
-        return ResultGenerator.genSuccessResult(userService.getAllUser());
+        return ResultGenerator.genSuccessResult(userService.findAll());
     }
     @RequestMapping("/register")
     @ResponseBody

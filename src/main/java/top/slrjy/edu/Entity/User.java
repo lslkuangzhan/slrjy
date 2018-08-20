@@ -3,6 +3,7 @@ package top.slrjy.edu.Entity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+
 import javax.validation.constraints.NotBlank;
 
 @Table(name = "user")
@@ -16,16 +17,14 @@ public class User {
     private String name;
     @NotBlank(message = "电话不能为空")
     @Length(min = 6, max = 32,message = "电话长度不对")
-    @Column(name = "tel")
-    private String tel;
-
     @Column(name = "addresss")
-    private String address;
+    private String telNumber;
 
+    @Column(name = "tel")
+    private String address;
 
     @Column( name = "banji")
     private String room;
-
     public String getRoom() {
         return room;
     }
@@ -50,12 +49,12 @@ public class User {
         this.name = name;
     }
 
-    public String getTel() {
-        return tel;
+    public String getTelNumber() {
+        return telNumber;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
     }
 
     public String getAddress() {

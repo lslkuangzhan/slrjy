@@ -14,11 +14,10 @@ spring:
     favicon:
       enabled: false
 mybatis:
-  mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.edu.luc_bs.Entity
-
-pagehelper:
-    helperDialect: mysql
-    reasonable: true
-    supportMethodsArguments: true
-    params: count=countSql
+  type-aliases-package: top.slrjy.edu.Entity
+  configuration:
+    map-underscore-to-camel-case: false
+logging:
+  level:
+     top.slrjy.edu : debug
+# 打印sql

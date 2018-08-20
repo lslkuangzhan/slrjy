@@ -2,33 +2,67 @@ package top.slrjy.edu.Entity;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private String id;
     @NotBlank (message = "用户名不能为空")
-    private String username;
-    @NotBlank(message = "密码不能为空")
-    @Length(min = 6, max = 32,message = "密码长度不对")
-    private String password;
+    @Column(name = "name")
+    private String name;
+    @NotBlank(message = "电话不能为空")
+    @Length(min = 6, max = 32,message = "电话长度不对")
+    @Column(name = "tel")
+    private String tel;
 
-    public String getUsername() {
-        return username;
+    @Column(name = "addresss")
+    private String address;
+
+
+    @Column( name = "banji")
+    private String room;
+
+    public String getRoom() {
+        return room;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRoom(String room) {
+        this.room = room;
     }
 
-    public String getPassword() {
-        return password;
+    public String getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String toString() {
-        return "username :" + this.username + ",password :"+this.password;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

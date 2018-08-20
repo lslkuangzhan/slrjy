@@ -1,10 +1,12 @@
 package top.slrjy.edu.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.slrjy.edu.Config.Result;
 import top.slrjy.edu.Config.ResultGenerator;
+import top.slrjy.edu.Service.UserService;
 
 /**
  * @ Author : Luc .
@@ -14,6 +16,8 @@ import top.slrjy.edu.Config.ResultGenerator;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
+    @Autowired
+    UserService userService;
     @RequestMapping("/show")
     @ResponseBody
     public String show() {
@@ -23,7 +27,7 @@ public class LoginController {
     @RequestMapping("/login")
     @ResponseBody
     public Result login() {
-        return ResultGenerator.genSuccessResult("登陆成功");
+        return ResultGenerator.genSuccessResult(userService.getAllUser());
     }
     @RequestMapping("/register")
     @ResponseBody

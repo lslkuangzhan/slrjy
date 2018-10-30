@@ -10,7 +10,7 @@ public class ErrorLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "className")
+
     private String className;
 
     private String methodName;

@@ -30,4 +30,8 @@ public class TestController {
     public Result show2(@NotBlank  @Size(min = 8, max = 10) String code) {
         return  ResultGenerator.genSuccessResult("show2");
     }
+    @RequestMapping("/show3")
+    public Result show3() {
+        return  ResultGenerator.genSuccessResult("this  is  show3");
+    }
 }

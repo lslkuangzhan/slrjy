@@ -39,13 +39,12 @@ public class TestOrder {
     private final Validator beanValidator = factory.getValidator();
     @Autowired
     ErrorLogDao logDao;
-    @Autowired
-    UserDao userDao;
     @Pointcut("execution(* top.slrjy.edu.Controller..*(..)) && !execution(* top.slrjy.edu.Controller.LoginController.*(..))")
     public void controllerMethodPointcut(){}
     @Pointcut("within(top.slrjy.edu.Controller..*) && !within(top.slrjy.edu.Controller.LoginController)")
     public void pointCut1(){}
-
+    @Pointcut("execution(* top.slrjy.edu.Controller..*(..))")
+    public void controllerAllPointcut(){}
     /*
       调用数据验证
      */
@@ -108,7 +107,7 @@ public class TestOrder {
     }
 
 
-    @AfterThrowing(throwing = "e",pointcut="controllerMethodPointcut()")
+    @AfterThrowing(throwing = "e",pointcut="controllerAllPointcut()")
     public void afterThrowing(JoinPoint joinPoint,Throwable e) {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
@@ -117,12 +116,9 @@ public class TestOrder {
         String arg = "";
         for (int i=0;i<args.length;i++)
         {
-            arg += args[i];
+            arg += args[i].toString();
         }
         String errorMessage =e.getMessage()+e.getStackTrace()[0].getLineNumber();
-        System.out.println(location );
-        System.out.println(arg );
-        System.out.println(errorMessage );
         ErrorLog errorLog = new ErrorLog();
         errorLog.setClassName(className);
         errorLog.setMethodName(methodName);

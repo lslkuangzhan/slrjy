@@ -68,4 +68,12 @@ public class UserService  implements top.slrjy.edu.Config.Service{
     public List findAll() {
         return userDao.getAllUser();
     }
+
+    public String  login  (User user){
+        User user1 =userDao.selectOne(user);
+        if (user1!=null){
+            return  "success";
+        }
+        return  "false";
+    }
 }

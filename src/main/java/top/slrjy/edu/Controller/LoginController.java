@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.slrjy.edu.Config.Result;
 import top.slrjy.edu.Config.ResultGenerator;
+import top.slrjy.edu.Entity.User;
 import top.slrjy.edu.Service.UserService;
 
 /**
@@ -26,8 +27,8 @@ public class LoginController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Result login() {
-        return ResultGenerator.genSuccessResult(userService.findAll());
+    public Result login(User user) {
+            return ResultGenerator.genSuccessResult(userService.login(user));
     }
     @RequestMapping("/register")
     @ResponseBody

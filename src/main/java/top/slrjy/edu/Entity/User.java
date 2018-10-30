@@ -17,10 +17,9 @@ public class User {
     private String name;
     @NotBlank(message = "电话不能为空")
     @Length(min = 6, max = 32,message = "电话长度不对")
-    @Column(name = "telNumber")
+
     private String telNumber;
 
-    @Column(name = "address")
     private String address;
 
     @Column( name = "room")
@@ -63,5 +62,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    @Override
+    public String toString() {
+        return "  name : "+ name +
+                "  telNumber  : "+telNumber+
+                "  address:"+address+
+                "  room:"+room;
     }
 }

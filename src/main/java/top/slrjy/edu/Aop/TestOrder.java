@@ -6,11 +6,16 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import top.slrjy.edu.Config.DescribeException;
 import top.slrjy.edu.Config.Result;
 import top.slrjy.edu.Config.ResultGenerator;
+import top.slrjy.edu.Dao.ErrorLogDao;
+import top.slrjy.edu.Dao.UserDao;
+import top.slrjy.edu.Entity.ErrorLog;
+import top.slrjy.edu.Entity.User;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -18,6 +23,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.executable.ExecutableValidator;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -31,7 +37,10 @@ public class TestOrder {
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final ExecutableValidator methodValidator = factory.getValidator().forExecutables();
     private final Validator beanValidator = factory.getValidator();
-
+    @Autowired
+    ErrorLogDao logDao;
+    @Autowired
+    UserDao userDao;
     @Pointcut("execution(* top.slrjy.edu.Controller..*(..)) && !execution(* top.slrjy.edu.Controller.LoginController.*(..))")
     public void controllerMethodPointcut(){}
     @Pointcut("within(top.slrjy.edu.Controller..*) && !within(top.slrjy.edu.Controller.LoginController)")
@@ -114,35 +123,16 @@ public class TestOrder {
         System.out.println(location );
         System.out.println(arg );
         System.out.println(errorMessage );
+        ErrorLog errorLog = new ErrorLog();
+        errorLog.setClassName(className);
+        errorLog.setMethodName(methodName);
+        errorLog.setErrorType(errorMessage);
+        errorLog.setArg(arg);
+        errorLog.setCreatTime(new Date());
+        logDao.insertSelective(errorLog);
 
 
     }
-   /* @Before("controllerMethodPointcut()")
-    public void before(JoinPoint joinPoint) {
-        System.out.println("[Aspect1] before advise");
-    }
-
-    @Around("controllerMethodPointcut()")
-    public void around(ProceedingJoinPoint pjp) throws  Throwable{
-        System.out.println("[Aspect1] around advise 1");
-        pjp.proceed();
-        System.out.println("[Aspect1] around advise2");
-    }
-
-    @AfterReturning("controllerMethodPointcut()")
-    public void afterReturning(JoinPoint joinPoint) {
-        System.out.println("[Aspect1] afterReturning advise");
-    }
-
-    @AfterThrowing("controllerMethodPointcut()")
-    public void afterThrowing(JoinPoint joinPoint) {
-        System.out.println("[Aspect1] afterThrowing advise");
-    }
-
-    @After("controllerMethodPointcut()")
-    public void after(JoinPoint joinPoint) {
-        System.out.println("[Aspect1] after advise");
-    }*/
 
    /**
     *   数据验证的方法

@@ -17,13 +17,13 @@ public class User {
     private String name;
     @NotBlank(message = "电话不能为空")
     @Length(min = 6, max = 32,message = "电话长度不对")
-    @Column(name = "addresss")
+    @Column(name = "telNumber")
     private String telNumber;
 
-    @Column(name = "tel")
+    @Column(name = "address")
     private String address;
 
-    @Column( name = "banji")
+    @Column( name = "room")
     private String room;
     public String getRoom() {
         return room;

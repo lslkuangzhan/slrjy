@@ -21,6 +21,12 @@ public class ResultGenerator {
                 .setMessage(DEFAULT_SUCCESS_MESSAGE)
                 .setData(data);
     }
+    public static Result genSuccessResult(String message,Object data) {
+        return new Result()
+                .setCode(ResultCode.SUCCESS)
+                .setMessage(message)
+                .setData(data);
+    }
 
     public static Result genFailResult(String message) {
         return new Result()

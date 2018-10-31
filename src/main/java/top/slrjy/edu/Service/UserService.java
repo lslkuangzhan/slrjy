@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 import top.slrjy.edu.Dao.UserDao;
-import top.slrjy.edu.Entity.User;
+
 
 import java.util.List;
 
@@ -69,11 +69,5 @@ public class UserService  implements top.slrjy.edu.Config.Service{
         return userDao.getAllUser();
     }
 
-    public String  login  (User user){
-        User user1 =userDao.selectOne(user);
-        if (user1!=null){
-            return  "success";
-        }
-        return  "false";
-    }
+
 }

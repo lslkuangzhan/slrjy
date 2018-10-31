@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.slrjy.edu.Config.Result;
 import top.slrjy.edu.Config.ResultGenerator;
+import top.slrjy.edu.Entity.Login;
 import top.slrjy.edu.Entity.User;
+import top.slrjy.edu.Service.LoginService;
 import top.slrjy.edu.Service.UserService;
 
 /**
@@ -18,7 +20,7 @@ import top.slrjy.edu.Service.UserService;
 @RequestMapping("/login")
 public class LoginController {
     @Autowired
-    UserService userService;
+    LoginService loginService;
     @RequestMapping("/show")
     @ResponseBody
     public String show() {
@@ -27,8 +29,8 @@ public class LoginController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Result login(User user) {
-            return ResultGenerator.genSuccessResult(userService.login(user));
+    public Result login(Login login ) {
+            return loginService.login(login);
     }
     @RequestMapping("/register")
     @ResponseBody

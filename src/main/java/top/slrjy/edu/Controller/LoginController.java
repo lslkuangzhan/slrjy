@@ -34,7 +34,13 @@ public class LoginController {
     }
     @RequestMapping("/register")
     @ResponseBody
-    public Result register() {
-        return ResultGenerator.genSuccessResult("注册成功");
+    public Result register(Login login) {
+        return loginService.register(login);
+    }
+
+    @RequestMapping("/isExist")
+    @ResponseBody
+    public Result isExist(String account) {
+        return ResultGenerator.genSuccessResult(loginService.isExist(account));
     }
 }

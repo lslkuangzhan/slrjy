@@ -9,6 +9,8 @@ import top.slrjy.edu.Dao.LoginDao;
 import top.slrjy.edu.Entity.Login;
 import top.slrjy.edu.Entity.User;
 
+import java.util.List;
+
 @Service
 public class LoginService  {
     @Autowired
@@ -26,5 +28,25 @@ public class LoginService  {
             return ResultGenerator.genSuccessResult("error","密码错误!");
         }
 
+    }
+
+    public String isExist  (String account){
+        int isExist  = loginDao.isExist(account);
+        if (isExist== 0){
+            return "该账可以注册!";
+        }
+        return "该账户已存在";
+    }
+
+
+    public Result register(Login login){
+        int isExist  = loginDao.isExist(login.getAccount());
+        if(isExist == 0){
+            login.setState("1");
+            loginDao.insertSelective(login);
+            return ResultGenerator.genSuccessResult("注册成功！");
+        }else{
+            return ResultGenerator.genSuccessResult("fail","注册失败！");
+        }
     }
 }
